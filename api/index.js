@@ -24,11 +24,11 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('hola mi server en express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/api/nueva-ruta', (req, res) => {
   res.send('hola soy nueva ruta de mi server en express');
 });
 
