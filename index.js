@@ -6,8 +6,19 @@ const {logErrors, errorHandler, boomErrorHandler} = require('./middlewares/error
 const app = express();
 const port = 3000;
 
+const whitelist = ['http://127.0.0.1:5500'];
+const options = {
+  origin: (origin, callback) => {
+    if(whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('no permitido'));
+    }
+  }
+}
+
 app.use(express.json());
-app.use(cors()); //ojo la posición del cors
+app.use(cors(options)); //ojo la posición del cors
 routerApi(app);
 app.use(logErrors);
 app.use(boomErrorHandler);
