@@ -19,10 +19,7 @@ const options = {
 
 app.use(express.json());
 app.use(cors(options)); //ojo la posición del cors
-routerApi(app);
-app.use(logErrors);
-app.use(boomErrorHandler);
-app.use(errorHandler);
+
 
 app.get('/api', (req, res) => {
   res.send('hola mi server en express');
@@ -31,6 +28,11 @@ app.get('/api', (req, res) => {
 app.get('/api/nueva-ruta', (req, res) => {
   res.send('hola soy nueva ruta de mi server en express');
 });
+
+routerApi(app);
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log('escuchando en mi puerto ' + port);
