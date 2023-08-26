@@ -4,14 +4,13 @@ services:
   postgres:
     image: postgres:13
     environment:
-      - DATABASE_HOST=127.0.0.1
       - POSTGRES_DB=my_store
       - POSTGRES_USER=carlos
       - POSTGRES_PASSWORD=admin123
     ports:
       - 5432:5432
     volumes:
-      - ./postgres_data:/var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data/
 
   pgadmin:
     image: dpage/pgadmin4
@@ -20,3 +19,5 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
     - 5050:80
+volumes:
+  pgdata:
