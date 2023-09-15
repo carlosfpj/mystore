@@ -1,8 +1,10 @@
-
-
 const express = require('express');
-const router = express.Router();
+
 const CategoryService = require('../services/category.service');
+const validatorHandler = require('../middlewares/validator.handler');
+const {createCategorySchema, getCategorySchema} = require('../schemas/category.schema');
+
+const router = express.Router();
 const service = new CategoryService();
 
 router.get('/', async (req, res, next) => {
@@ -13,6 +15,20 @@ router.get('/', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/:id',
+ validatorHandler(getCategorySchema,
+   'params'),
+  async (req, res, next) => {
+    try {
+      const {id} = req.params;
+      const category = await service.findOne(id);
+      res.json(category);
+    } catch(error) {
+      next(error);
+    }
+  }
+);
 
 router.get('/:categoryId/products/:productsId',
   (req, res) => {

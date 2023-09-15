@@ -12,6 +12,13 @@ class CategoryService {
     const categories = await models.Category.findAll();
     return categories;
   }
+
+  async findOne(id) {
+    const category = await models.Category.findByPk(id, {
+      include: ['products']
+    });
+    return category;
+  }
 }
 
 module.exports = CategoryService;
