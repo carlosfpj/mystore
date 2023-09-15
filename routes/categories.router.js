@@ -1,5 +1,18 @@
+
+
 const express = require('express');
 const router = express.Router();
+const CategoryService = require('../services/category.service');
+const service = new CategoryService();
+
+router.get('/', async (req, res, next) => {
+  try {
+    const categories = await service.find();
+    res.json(categories)
+  }catch(error) {
+    next(error);
+  }
+});
 
 router.get('/:categoryId/products/:productsId',
   (req, res) => {
@@ -11,8 +24,6 @@ router.get('/:categoryId/products/:productsId',
   }
 );
 
-router.get('/', (req,res) => {
-  res.send('esta es categorias')
-})
+
 
 module.exports = router;
