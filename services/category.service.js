@@ -19,6 +19,17 @@ class CategoryService {
     });
     return category;
   }
+
+  async update(id, changes) {
+    return {
+      id,
+      changes
+    };
+  }
+
+  async delete(id) {
+    return {id};
+  }
 }
 
 module.exports = CategoryService;
