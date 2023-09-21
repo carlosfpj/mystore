@@ -1,6 +1,6 @@
 const {Model, DataTypes, Sequelize} = require('sequelize');
 
-const CATEGORY_TABLE = 'category';
+const CATEGORY_TABLE = 'categories';
 
 const CategorySchema = {
   id: {
@@ -10,6 +10,11 @@ const CategorySchema = {
     type: DataTypes.INTEGER
   },
   name: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+  },
+  image: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -24,7 +29,13 @@ const CategorySchema = {
 class Category extends Model {
 
   associate(models) {
+    //aqui estamos diciendo que UNA categoría
+    //puede tener MUCHOS productos
     this.hasMany(models.Product, {
+      //aqui le damos el ALIAS para resolverlo
+      //cuando necesitemos que esté de forma anidada
+      //y colocamos la foreignKey para que sequelize sepa
+      //como resolver el modelo
       as: 'products', foreignKey:'categoryId'
     });
   }
