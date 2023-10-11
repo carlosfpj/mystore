@@ -28,7 +28,7 @@ const CategorySchema = {
 
 class Category extends Model {
 
-  associate(models) {
+  static associate(models) {
     //aqui estamos diciendo que UNA categoría
     //puede tener MUCHOS productos
     this.hasMany(models.Product, {
@@ -36,7 +36,8 @@ class Category extends Model {
       //cuando necesitemos que esté de forma anidada
       //y colocamos la foreignKey para que sequelize sepa
       //como resolver el modelo
-      as: 'products', foreignKey:'categoryId'
+      as: 'products',
+      foreignKey:'categoryId'
     });
   }
 
