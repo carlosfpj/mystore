@@ -22,7 +22,7 @@ const OrderProductSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
-  oderId: {
+  orderId: {
     field: 'order_id',
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ const OrderProductSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
-      model: ORDER_TABLE,
+      model: PRODUCT_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -50,7 +50,6 @@ class OrderProduct extends Model {
 
   static associate(models) {
     //aqui se definen las relaciones
-
   }
 
   static config(sequelize) {

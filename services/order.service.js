@@ -10,13 +10,21 @@ class OrderService {
     return newOrder;
   }
 
+  async addItem(data) {
+    const newItem = await models.OrderProduct.create(data);
+    return newItem;
+  }
+
   async findOne(id) {
     const order = await models.Order.findByPk(id, {
+      //que incluya la asociación customer
       include: [
         {
           association: 'customer',
           include: ['user']
-        }
+        },
+        //otra forma de incluir otra asociación llamada 'items'
+        'items'
       ]
     });
     return order;
